@@ -1,0 +1,90 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body> 
+
+  <div id="timer" align="center"><a class="fa fa-clock-o"></a> <span id="time"></span></div>
+
+<span id="form">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdURDtEce7KjXOx7LDfpi8OUI_4hDK7WTtF-nhkc39LIeVUfQ/viewform?usp=sf_link">Tunggu yaa</iframe><br />
+</span>
+</body>
+
+<script>
+
+function startTimer(duration, interval, tolerance, display) {
+    var timer = duration, minutes, seconds, delayMinutes, delaySeconds;
+    var batas = timer + tolerance * 60;
+    interval = 60 * interval;
+    setInterval(function () {
+        delayMinutes = parseInt((timer - interval) / 60, 10);
+        delaySeconds = parseInt((timer - interval) % 60, 10);
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        delayMinutes = delayMinutes < 10 ? "0" + delayMinutes : delayMinutes;
+        delaySeconds = delaySeconds < 10 ? "0" + delaySeconds : delaySeconds;
+
+        if (timer <= interval) {
+          document.getElementById("form").style.visibility = "visible";
+          display.textContent = "Tersisa " + minutes + ":" + seconds + " Menit";
+        } else {
+          display.textContent = "Dibuka " + delayMinutes + ":" + delaySeconds + " Menit lagi";
+        }
+
+        if (--timer < 0) {
+
+           display.textContent = tolerance + " Menit Toleransi";
+        }
+    if (--batas < 0) {
+
+           document.getElementById("form").style.visibility = "hidden";
+           display.textContent = "Akses tidak diberikan";
+        }
+
+    }, 1000);
+}
+
+window.onload = function () {
+    var interval = 60;
+    var tolerance = 2;
+    var endDate = '2022-10-04T14:56:00.000';
+    document.getElementById("form").style.visibility = "hidden";
+    var display = document.querySelector('#time');
+    var countDownDate = new Date(endDate);
+    var nowDate = new Date();
+    var duration = (countDownDate.getTime() - nowDate.getTime())/1000;
+    startTimer(duration, interval, tolerance, display);
+};
+
+</script>
+
+<style type="text/css">
+  
+body {
+    overflow: visible;
+}
+
+iframe {
+
+height: 600px;
+width: 100%;
+border: 0px;
+padding-top: 8px;
+margin: 0px
+}
+
+#timer {
+background-color: #000000;
+color: #FFFFFF;
+font-family: arial;
+font-weight: bold;
+padding: 10px 30px;
+border-radius: 100px;
+}
+
+</style>
+
