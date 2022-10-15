@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body> 
@@ -6,7 +5,7 @@
   <div id="timer" align="center"><a class="fa fa-clock-o"></a> <span id="time"></span></div>
 
 <span id="form">
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdURDtEce7KjXOx7LDfpi8OUI_4hDK7WTtF-nhkc39LIeVUfQ/viewform?usp=sf_link">Tunggu yaa</iframe><br />
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdURDtEce7KjXOx7LDfpi8OUI_4hDK7WTtF-nhkc39LIeVUfQ/viewform?usp=sf_link">Mohon Menunggu</iframe><br />
 </span>
 </body>
 
@@ -37,7 +36,7 @@ function startTimer(duration, interval, tolerance, display) {
 
         if (--timer < 0) {
 
-           display.textContent = tolerance + " Menit Toleransi";
+           display.textContent = tolerance + " Menit Toleransi, SILAHKAN TEKAN TOMBOL SUBMIT!";
         }
     if (--batas < 0) {
 
@@ -48,13 +47,20 @@ function startTimer(duration, interval, tolerance, display) {
     }, 1000);
 }
 
+function addMinutes(date, minutes) {
+  date.setMinutes(date.getMinutes() + minutes);
+
+  return date;
+}
+
 window.onload = function () {
-    var interval = 60;
-    var tolerance = 2;
-    var endDate = '2022-10-04T14:56:00.000';
+    var interval = 30;
+    var tolerance = 1;
+    var startDate = '2022-10-15T08:36:00.000';
     document.getElementById("form").style.visibility = "hidden";
     var display = document.querySelector('#time');
-    var countDownDate = new Date(endDate);
+    var initDate = new Date(startDate);
+    var countDownDate = addMinutes(initDate, interval);
     var nowDate = new Date();
     var duration = (countDownDate.getTime() - nowDate.getTime())/1000;
     startTimer(duration, interval, tolerance, display);
